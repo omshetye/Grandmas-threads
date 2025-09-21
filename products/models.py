@@ -3,6 +3,7 @@ from base.models import BaseModel
 from django.utils.text import slugify
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
+from cloudinary_storage.storage import MediaCloudinaryStorage
 
 # Create your models here.
 
@@ -10,7 +11,7 @@ from django.contrib.auth.models import User
 class Category(BaseModel):
     category_name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, null=True, blank=True)
-    category_image = models.ImageField(upload_to="catgories")
+    category_image = models.ImageField(storage=MediaCloudinaryStorage())
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.category_name)
