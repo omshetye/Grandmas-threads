@@ -26,6 +26,7 @@ def index(request):
     page = request.GET.get('page', 1)
     paginator = Paginator(query, 20)
 
+    products = []
     try:
         products = paginator.page(page)
     except PageNotAnInteger:
