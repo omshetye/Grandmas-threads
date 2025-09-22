@@ -21,7 +21,7 @@
                 <td>
                   <figure class="itemside">
                     <div class="aside">
-                      <img src="/media/{{ item.product.product_images.first.image }}" class="img-sm"/>
+                      <img src="{{ item.product.product_images.first.image.url }}" class="img-sm"/>
                     </div>
                     <figcaption class="info">
                       <a href="{% url 'get_product' item.product.slug %}" class="title text-dark">
