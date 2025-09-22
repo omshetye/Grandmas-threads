@@ -47,8 +47,8 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 # Application definition
 
-SITE_ID = 3
-
+SITE_ID = 9
+# SITE_ID = int(os.environ.get("DJANGO_SITE_ID", 1))
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -90,7 +90,9 @@ SOCIALACCOUNT_PROVIDERS = {
             "profile",
             "email"
         ],
-        "AUTH_PARAMS": {"access_type": "online"}
+        "AUTH_PARAMS": {
+            "access_type": "online",
+            "prompt": "select_account"}
     },
 
     # Facebook authentication
@@ -245,6 +247,12 @@ LOGOUT_REDIRECT_URL = "/"
 # Auto signup
 SOCIALACCOUNT_AUTO_SIGNUP = True
 SOCIALACCOUNT_LOGIN_ON_GET = True
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "none"  # or "mandatory" if you want email verify
+SOCIALACCOUNT_AUTO_SIGNUP = True
 
 DEFAULT_DOMAIN = '127.0.0.1:8000'
 DEFAULT_HTTP_PROTOCOL = 'http'
