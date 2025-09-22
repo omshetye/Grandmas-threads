@@ -3,7 +3,7 @@ from base.models import BaseModel
 from django.utils.text import slugify
 from django.utils.html import mark_safe
 from django.contrib.auth.models import User
-from cloudinary_storage.storage import MediaCloudinaryStorage
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 
@@ -11,7 +11,7 @@ from cloudinary_storage.storage import MediaCloudinaryStorage
 class Category(BaseModel):
     category_name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, null=True, blank=True)
-    category_image = models.ImageField(storage=MediaCloudinaryStorage())
+    category_image = CloudinaryField('image')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.category_name)
@@ -72,7 +72,7 @@ class Product(BaseModel):
 class ProductImage(BaseModel):
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE, related_name='product_images')
-    image = models.ImageField(upload_to='product')
+    image = CloudinaryField('image')
 
     def img_preview(self):
         return mark_safe(f'<img src="{self.image.url}" width="500"/>')
