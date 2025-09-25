@@ -235,10 +235,10 @@ RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID')
 RAZORPAY_SECRET_KEY = config('RAZORPAY_SECRET_KEY')
 
 # Auth Backends Configurations
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
-)
+]
 
 LOGIN_URL = "/accounts/login/"
 LOGIN_REDIRECT_URL = "/"
