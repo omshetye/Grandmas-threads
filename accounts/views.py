@@ -66,11 +66,15 @@ def register_page(request):
         last_name = request.POST.get('last_name')
         email = request.POST.get('email')
         password = request.POST.get('password')
-
+        
         user_obj = User.objects.filter(username=username, email=email)
 
-        if user_obj.exists():
-            messages.info(request, 'Username or email already exists!')
+        # Check if username or email already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists!')
+            return HttpResponseRedirect(request.path_info)
+        if User.objects.filter(email=email).exists():
+            messages.error(request, 'Email already exists!')
             return HttpResponseRedirect(request.path_info)
 
         user_obj = User.objects.create(
